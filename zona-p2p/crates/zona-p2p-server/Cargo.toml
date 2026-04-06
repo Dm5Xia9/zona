@@ -1,0 +1,25 @@
+[package]
+name    = "zona-p2p-server"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "zona_p2p_server"
+path = "src/lib.rs"
+
+[dependencies]
+zona-p2p-types   = { workspace = true }
+zona-p2p-crypto  = { workspace = true }
+zona-p2p-overlay = { workspace = true }
+zona-p2p-node    = { workspace = true }
+reqwest          = { workspace = true }
+
+tokio      = { workspace = true }
+tracing    = { workspace = true }
+serde      = { workspace = true }
+serde_json = { workspace = true }
+anyhow     = { workspace = true }
+hex        = { workspace = true }
+axum       = { workspace = true }
+futures    = { workspace = true }
+base64     = { workspace = true }

@@ -1,0 +1,11 @@
+[package]
+name    = "zona-p2p-gossip"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+zona-p2p-types   = { workspace = true }
+zona-p2p-crypto  = { workspace = true }
+zona-p2p-overlay = { workspace = true }
+tokio            = { workspace = true }
+tracing          = { workspace = true }

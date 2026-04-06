@@ -1,0 +1,4 @@
+# Domain (ASCII, case-insensitive) -> list of 64-hex NodeIds (e.g. proxy nodes for this host).
+# Example:
+# "example.com":
+#   - "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

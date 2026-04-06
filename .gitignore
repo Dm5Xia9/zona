@@ -1,0 +1,51 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+TestResults/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.cache
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code / Cursor local state
+.vscode/
+.cursor/
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+*.pid
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Rust (workspace crates and apps)
+**/target/
+**/*.rs.bk
+
+# Repo-specific build outputs
+go-proxy/*.exe
+go-proxy/*.dll
+go-proxy/*.pdb
+
+# Node (if used in scripts/tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

@@ -1,0 +1,3 @@
+# Mount over this file or edit after build: domain -> list of 64-hex NodeIds (e.g. proxy).
+# PROXY_NODE_ID: docker compose logs proxy-server
+{}

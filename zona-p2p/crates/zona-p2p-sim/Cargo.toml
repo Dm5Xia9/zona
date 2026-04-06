@@ -1,0 +1,34 @@
+[package]
+name    = "zona-p2p-sim"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "zona_p2p_sim"
+path = "src/lib.rs"
+
+[[bin]]
+name = "run-sim"
+path = "src/main.rs"
+
+[[bin]]
+name = "sim-interactive"
+path = "src/interactive_main.rs"
+
+[dependencies]
+zona-p2p-client  = { path = "../zona-p2p-client" }
+zona-p2p-types   = { workspace = true }
+zona-p2p-crypto  = { workspace = true }
+zona-p2p-overlay = { workspace = true }
+zona-p2p-node    = { workspace = true }
+rand             = { workspace = true }
+tracing          = { workspace = true }
+tracing-subscriber = { workspace = true }
+hex                = { workspace = true }
+anyhow             = { workspace = true }
+serde              = { workspace = true }
+serde_json         = { workspace = true }
+reqwest            = { workspace = true }
+base64             = { workspace = true }
+
+[dev-dependencies]

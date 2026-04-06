@@ -1,0 +1,18 @@
+[package]
+name    = "zona-p2p-bft"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+zona-p2p-types  = { workspace = true }
+zona-p2p-crypto = { workspace = true }
+serde           = { workspace = true }
+bincode         = { workspace = true }
+sha2            = { workspace = true }
+ed25519-dalek   = { workspace = true }
+thiserror       = { workspace = true }
+tracing         = { workspace = true }
+hex             = { workspace = true }
+
+[dev-dependencies]
+rand = { workspace = true }

@@ -1,0 +1,19 @@
+[package]
+name    = "hello-server"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "hello-server"
+path = "src/main.rs"
+
+[dependencies]
+zona-p2p-server = { path = "../../crates/zona-p2p-server" }
+zona-p2p-crypto = { workspace = true }
+
+tokio              = { workspace = true }
+tracing            = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow             = { workspace = true }
+hex                = { workspace = true }
+axum               = { workspace = true }

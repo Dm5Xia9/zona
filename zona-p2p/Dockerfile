@@ -1,0 +1,51 @@
+# ── Build stage ───────────────────────────────────────────────────────────────
+FROM rust:1.86-slim AS builder
+
+WORKDIR /app
+
+# Cache dependencies.
+COPY Cargo.toml Cargo.lock ./
+# Copy workspace member manifests so cargo can resolve deps.
+COPY crates/zona-p2p-types/Cargo.toml     crates/zona-p2p-types/Cargo.toml
+COPY crates/zona-p2p-crypto/Cargo.toml    crates/zona-p2p-crypto/Cargo.toml
+COPY crates/zona-p2p-overlay/Cargo.toml   crates/zona-p2p-overlay/Cargo.toml
+COPY crates/zona-p2p-transport/Cargo.toml crates/zona-p2p-transport/Cargo.toml
+COPY crates/zona-p2p-gossip/Cargo.toml    crates/zona-p2p-gossip/Cargo.toml
+COPY crates/zona-p2p-node/Cargo.toml      crates/zona-p2p-node/Cargo.toml
+COPY crates/zona-p2p-sim/Cargo.toml       crates/zona-p2p-sim/Cargo.toml
+COPY crates/zona-p2p-client/Cargo.toml    crates/zona-p2p-client/Cargo.toml
+COPY crates/zona-p2p-server/Cargo.toml    crates/zona-p2p-server/Cargo.toml
+COPY servers/hello-server/Cargo.toml      servers/hello-server/Cargo.toml
+
+# Stub sources so cargo can compile deps without real code.
+RUN find crates -name "Cargo.toml" -exec dirname {} \; \
+    | xargs -I{} mkdir -p {}/src \
+ && echo 'fn main(){}' > crates/zona-p2p-node/src/main.rs \
+ && mkdir -p servers/hello-server/src \
+ && echo 'fn main(){}' > servers/hello-server/src/main.rs \
+ && for c in zona-p2p-types zona-p2p-crypto zona-p2p-overlay \
+             zona-p2p-transport zona-p2p-gossip zona-p2p-sim \
+             zona-p2p-client zona-p2p-server; do \
+      echo '' > crates/$c/src/lib.rs; \
+    done
+
+# Build with --features admin so Docker nodes expose the full admin HTTP API.
+RUN cargo build --release -p zona-p2p-node --features admin 2>/dev/null || true
+
+# Now copy real sources and build.
+COPY crates/ crates/
+COPY servers/ servers/
+RUN touch crates/*/src/*.rs crates/*/src/**/*.rs servers/*/src/*.rs 2>/dev/null || true
+RUN cargo build --release -p zona-p2p-node --features admin
+
+# ── Runtime stage ─────────────────────────────────────────────────────────────
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /app/target/release/zona-p2p /usr/local/bin/zona-p2p
+
+EXPOSE 7701
+
+ENTRYPOINT ["zona-p2p"]

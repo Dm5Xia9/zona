@@ -1,0 +1,35 @@
+[package]
+name    = "zona-p2p-node"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+# Enables the HTTP admin API (GET /api/info, /api/peers, /api/inbox;
+# POST /api/send). Required for Docker simulation mode.
+# Production nodes are built WITHOUT this feature — only /api/relay
+# and /api/introduce are exposed.
+admin = []
+
+[[bin]]
+name = "zona-p2p"
+path = "src/main.rs"
+
+[lib]
+name = "zona_p2p_node"
+path = "src/lib.rs"
+
+[dependencies]
+zona-p2p-types     = { workspace = true }
+zona-p2p-crypto    = { workspace = true }
+zona-p2p-overlay   = { workspace = true }
+tokio              = { workspace = true }
+tracing            = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde              = { workspace = true }
+serde_json         = { workspace = true }
+rand               = { workspace = true }
+anyhow             = { workspace = true }
+axum               = { workspace = true }
+reqwest            = { workspace = true }
+hex                = { workspace = true }
+tokio-util         = { workspace = true }

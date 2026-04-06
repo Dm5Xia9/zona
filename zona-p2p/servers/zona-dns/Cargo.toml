@@ -1,0 +1,22 @@
+[package]
+name    = "zona-dns"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "zona-dns"
+path = "src/main.rs"
+
+[dependencies]
+zona-p2p-server = { workspace = true }
+zona-p2p-crypto = { workspace = true }
+tokio           = { workspace = true }
+axum            = { workspace = true }
+serde           = { workspace = true }
+serde_json      = { workspace = true }
+serde_yaml      = { workspace = true }
+anyhow          = { workspace = true }
+tracing         = { workspace = true }
+tracing-subscriber = { workspace = true }
+clap            = { workspace = true }
+hex             = { workspace = true }

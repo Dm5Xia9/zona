@@ -1,0 +1,51 @@
+[workspace]
+members = [
+    "crates/zona-p2p-types",
+    "crates/zona-p2p-crypto",
+    "crates/zona-p2p-overlay",
+    "crates/zona-p2p-transport",
+    "crates/zona-p2p-gossip",
+    "crates/zona-p2p-bft",
+    "crates/zona-p2p-node",
+    "crates/zona-p2p-client",
+    "crates/zona-p2p-sim",
+    "crates/zona-p2p-server",
+    "servers/hello-server",
+    "servers/proxy-server",
+    "servers/zona-curl",
+    "servers/zona-dns",
+]
+resolver = "2"
+
+[workspace.dependencies]
+serde       = { version = "1", features = ["derive"] }
+bincode     = "1"
+tokio       = { version = "1", features = ["full"] }
+tokio-util  = { version = "0.7", features = ["codec"] }
+bytes       = "1"
+rand        = "0.8"
+sha2        = "0.10"
+ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
+tracing     = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+thiserror   = "1"
+anyhow      = "1"
+hex         = "0.4"
+futures     = "0.3"
+serde_json  = "1"
+serde_yaml    = "0.9"
+axum        = { version = "0.7", default-features = false, features = ["http1", "tokio", "json", "query"] }
+reqwest     = { version = "0.12", default-features = false, features = ["json", "blocking", "rustls-tls"] }
+tower       = { version = "0.4", default-features = false }
+base64      = "0.22"
+clap        = { version = "4", features = ["derive", "env"] }
+
+# workspace-internal
+zona-p2p-types     = { path = "crates/zona-p2p-types" }
+zona-p2p-crypto    = { path = "crates/zona-p2p-crypto" }
+zona-p2p-overlay   = { path = "crates/zona-p2p-overlay" }
+zona-p2p-gossip    = { path = "crates/zona-p2p-gossip" }
+zona-p2p-transport = { path = "crates/zona-p2p-transport" }
+zona-p2p-bft       = { path = "crates/zona-p2p-bft" }
+zona-p2p-node      = { path = "crates/zona-p2p-node" }
+zona-p2p-server    = { path = "crates/zona-p2p-server" }
