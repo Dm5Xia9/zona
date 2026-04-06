@@ -56,6 +56,24 @@ Sandbox  Docker
 .\scripts\docker-p2p.ps1 -Down
 ```
 
+#### Быстрый старт на Linux (одна команда)
+
+Скрипт **`bootstrap-zona-node-stack.sh`** (в корне репозитория https://github.com/Dm5Xia9/zona): при необходимости ставит Docker (через официальный `get.docker.com`, нужен `sudo`), скачивает **последний** релизный бинарник **zona-p2p** (`zona-p2p-linux-x64.tar.gz` из GitHub Releases), создаёт в **`zona-node-stack/`** (по умолчанию в **текущем каталоге**, если скрипт запущен через `curl | bash`) файлы `Dockerfile` и `docker-compose.yml`. Для узла при каждом запуске скрипта генерируется случайный **`ZONA_NODE_SEED`** (64 hex-символа). Затем поднимается **один** узел в фоне (`docker compose up -d --build`, admin на хосте `http://localhost:17701`).
+
+Клонировать репозиторий не нужно: одна команда (ветка в URL — `main`, при необходимости замените на свою default-ветку). Релизы по умолчанию берутся с https://github.com/Dm5Xia9/zona:
+
+```bash
+curl -fL# https://raw.githubusercontent.com/Dm5Xia9/zona/main/bootstrap-zona-node-stack.sh | bash
+```
+
+Перед запуском имеет смысл перейти в нужный каталог (`cd`), туда же по умолчанию попадёт папка `zona-node-stack/`.
+
+Альтернатива: скачать `bootstrap-zona-node-stack.sh` и выполнить `bash bootstrap-zona-node-stack.sh`. Если запускаете из своего клона, для релизов используется `git remote origin` на GitHub, если он есть; иначе снова подставляется `Dm5Xia9/zona`.
+
+Требования: **bash**, **curl**, **jq** или **python3**, интернет. На GitHub должен быть релиз с архивом (см. `.github/workflows/release-p2p.yml`).
+
+Полезные переменные: `ZONA_DEPLOY_DIR`, `ZONA_GITHUB_REPO` (только если нужен другой репозиторий релизов, не апстрим), `GITHUB_TOKEN`. Логи: `cd zona-node-stack && docker compose logs -f`; остановка: `docker compose down`.
+
 #### Команды REPL
 
 | Команда | Описание |

@@ -38,6 +38,9 @@ Desktop.ini
 **/target/
 **/*.rs.bk
 
+# Local Docker bootstrap (prebuilt binaries + generated compose)
+zona-node-stack/
+
 # Repo-specific build outputs
 go-proxy/*.exe
 go-proxy/*.dll
