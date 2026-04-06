@@ -41,6 +41,10 @@ Desktop.ini
 # Local Docker bootstrap (prebuilt binaries + generated compose)
 zona-node-stack/
 
+# zona-install local builds
+zona-install/zona-install
+zona-install/zona-install.exe
+
 # Repo-specific build outputs
 go-proxy/*.exe
 go-proxy/*.dll

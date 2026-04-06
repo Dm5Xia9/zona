@@ -1,0 +1,10 @@
+FROM {{.BaseImage}}
+
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY {{.CopyBinaryName}} /usr/local/bin/zona-p2p
+RUN chmod +x /usr/local/bin/zona-p2p
+
+EXPOSE {{.ContainerAdminPort}}
+ENTRYPOINT ["zona-p2p"]
